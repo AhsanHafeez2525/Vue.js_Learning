@@ -4,19 +4,31 @@ export default {
     return {
       name: "john doe",
       status: "active",
-      statusNow: "active",
+      // statusNow: "active",
       tasks: ["Task one", "Task two", "Task three"],
       link: "https://google.com",
     };
+  },
+  methods: {
+    toggleStatus() {
+      if (this.status === "active") {
+        this.status = "pending";
+      } else if (this.status === "pending") {
+        this.status = "inactive";
+      } else {
+        this.status = "active";
+      }
+    },
   },
 };
 </script>
 
 <template>
   <h1>Vue job {{ name }}</h1>
-  <h4 v-if="status">the user is active {{ name }}</h4>
-  <h4 v-else-if="status === pending">the user is pending</h4>
-  <h4 v-else>the user is active</h4>
+  <!-- <h4 v-if="status">the user is active </h4> -->
+  <h4 v-if="status === 'active'">the user is active</h4>
+  <h4 v-else-if="status === 'pending'">the user is pending</h4>
+  <h4 v-else>the user is inactive</h4>
 
   <h2>Tasks:</h2>
   <ul>
@@ -26,6 +38,10 @@ export default {
   <a v-bind:href="link">Click for google</a>
   <!-- short way -->
   <a :href="link">Click for google</a>
+  <br />
+  <!-- <button v-on:click="toggleStatus">CHange Status</button> -->
+  <!-- short way -->
+  <button @click="toggleStatus">CHange Status</button>
 </template>
 
 <style scoped>
